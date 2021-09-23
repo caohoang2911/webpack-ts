@@ -1,27 +1,22 @@
-import { RouteApp } from 'core/router';
 import { lazy } from '@loadable/component';
-import { Suspense } from 'react';
+import { RouteApp } from 'core/router';
 
 const User = lazy(() => import('./UserPage'));
 const UserDetail = lazy(() => import('./UserDetailPage'));
-import { Loading } from './../../components/Loading/Loading';
+const UserTemplate = lazy(() => import('./UserTemplate'));
 
 export const routerUser: Array<RouteApp> = [
   {
     path: '/user',
     exact: true,
-    main: () => (
-      <Suspense fallback={<Loading />}>
-        <User />
-      </Suspense>
-    ),
+    main: () => <User />,
+  },
+  {
+    path: '/user/template',
+    main: () => <UserTemplate />,
   },
   {
     path: '/user/:id',
-    main: () => (
-      <Suspense fallback={<Loading />}>
-        <UserDetail />
-      </Suspense>
-    ),
+    main: () => <UserDetail />,
   },
 ];

@@ -1,7 +1,6 @@
 import { lazy } from '@loadable/component';
+import { routerUser } from 'modules/user/routerUser';
 const HomePage = lazy(() => import('modules/home'));
-const User = lazy(() => import('modules/user/UserPage'));
-const UserDetail = lazy(() => import('modules/user/UserDetailPage'));
 
 export interface RouteApp {
   path: string;
@@ -15,17 +14,5 @@ export const routerApp: Array<RouteApp> = [
     exact: true,
     main: () => <HomePage />,
   },
-  {
-    path: '/user',
-    exact: true,
-    main: () => <User />,
-  },
-  {
-    path: '/user/template',
-    main: () => <User />,
-  },
-  {
-    path: '/user/:id',
-    main: () => <UserDetail />,
-  },
+  ...routerUser,
 ];

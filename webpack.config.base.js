@@ -14,12 +14,14 @@ const rules = [
     use: [
       {
         loader: 'ts-loader',
-        options: {
-          getCustomTransformers: () => ({
-            before: [require('react-refresh-typescript')()],
-          }),
-          reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'],
-        },
+        options: isDeveloper
+          ? {
+              getCustomTransformers: () => ({
+                before: [require('react-refresh-typescript')()],
+              }),
+              reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'],
+            }
+          : undefined,
       },
     ],
   },
