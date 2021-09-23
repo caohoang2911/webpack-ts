@@ -1,0 +1,5 @@
+.cache
+package-lock.json
+/src/serviceWorker.js
+.prettierrc
+/src/setupTests.js.js

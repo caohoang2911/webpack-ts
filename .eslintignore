@@ -1,0 +1,6 @@
+.cache
+package-lock.json
+/src/serviceWorker.js
+.prettierrc
+/src/setupTests.js.js
+/src/react-app-env.d.ts
