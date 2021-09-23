@@ -2,6 +2,9 @@ console.log('Usage webpack.development.js');
 const base = require('./webpack.config.base');
 const { merge } = require('webpack-merge');
 const path = require('path');
+
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const devServer = {
   open: true,
   hot: true,
@@ -23,4 +26,5 @@ module.exports = merge(base, {
     path: path.resolve(__dirname, ''),
   },
   devServer,
+  plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean),
 });

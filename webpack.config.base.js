@@ -13,7 +13,12 @@ const rules = [
     use: [
       {
         loader: 'ts-loader',
-        options: { reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'] },
+        options: {
+          getCustomTransformers: () => ({
+            before: [require('react-refresh-typescript')()],
+          }),
+          reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'],
+        },
       },
     ],
   },
@@ -38,14 +43,14 @@ const rules = [
         options: {
           importLoaders: 1,
 
-          sourceMap: process.env.NODE_ENV === 'development' ? true : false,
+          sourceMap: NODE_ENV === 'development' ? true : false,
         },
       },
       {
         loader: 'sass-loader',
         options: {
           implementation: require('sass'),
-          sourceMap: process.env.NODE_ENV === 'development' ? true : false,
+          sourceMap: NODE_ENV === 'development' ? true : false,
         },
       },
       {
@@ -79,7 +84,7 @@ module.exports = {
       template: './src/core/index.html',
       minify:
         NODE_ENV == 'development'
-          ? {}
+          ? undefined
           : {
               collapseWhitespace: true,
               removeComments: true,
@@ -98,6 +103,6 @@ module.exports = {
       __VERSION__:
         NODE_ENV == 'development' ? JSON.stringify('dev_5fa3b9') : JSON.stringify('pro_5fa3b9'),
     }),
-    //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 };
