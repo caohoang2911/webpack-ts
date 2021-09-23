@@ -2,6 +2,7 @@ var path = require('path');
 const webpack = require('webpack');
 
 var NODE_ENV = process.env.NODE_ENV;
+var isDeveloper = process.env.NODE_ENV == 'development';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -27,7 +28,7 @@ const rules = [
     test: /\.gz$|\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2|\.eot$|.ttf$|\.wav$|\.mp3$|\.icon$|\?[a-z0-9]+?$/,
     options: {
       name(resourcePath, resourceQuery) {
-        if (process.env.NODE_ENV === 'development') {
+        if (isDeveloper) {
           return '[path][name].[ext]';
         }
         return 'static/media/[contenthash].[ext]';
@@ -43,14 +44,14 @@ const rules = [
         options: {
           importLoaders: 1,
 
-          sourceMap: NODE_ENV === 'development' ? true : false,
+          sourceMap: isDeveloper ? true : false,
         },
       },
       {
         loader: 'sass-loader',
         options: {
           implementation: require('sass'),
-          sourceMap: NODE_ENV === 'development' ? true : false,
+          sourceMap: isDeveloper ? true : false,
         },
       },
       {
@@ -80,28 +81,25 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: NODE_ENV == 'development' ? 'Development' : 'My project',
+      title: isDeveloper ? 'Development' : 'My project',
       template: './src/core/index.html',
-      minify:
-        NODE_ENV == 'development'
-          ? undefined
-          : {
-              collapseWhitespace: true,
-              removeComments: true,
-              removeRedundantAttributes: true,
-              removeScriptTypeAttributes: true,
-              removeStyleLinkTypeAttributes: true,
-              useShortDoctype: true,
-            },
+      minify: isDeveloper
+        ? undefined
+        : {
+            collapseWhitespace: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true,
+          },
     }),
     new MiniCssExtractPlugin({
-      filename: NODE_ENV == 'development' ? '[name].css' : 'static/css/[name].[contenthash:8].css',
-      chunkFilename:
-        NODE_ENV == 'development' ? '[id].css' : 'static/css/[name].[contenthash:8].chunk.css',
+      filename: isDeveloper ? '[name].css' : 'static/css/[name].[contenthash:8].css',
+      chunkFilename: isDeveloper ? '[id].css' : 'static/css/[name].[contenthash:8].chunk.css',
     }),
     new webpack.DefinePlugin({
-      __VERSION__:
-        NODE_ENV == 'development' ? JSON.stringify('dev_5fa3b9') : JSON.stringify('pro_5fa3b9'),
+      __VERSION__: isDeveloper ? JSON.stringify('dev_5fa3b9') : JSON.stringify('pro_5fa3b9'),
     }),
     //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],

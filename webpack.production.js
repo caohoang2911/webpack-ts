@@ -1,6 +1,5 @@
 console.log('Usage webpack.production.js');
 var path = require('path');
-var webpack = require('webpack');
 
 const base = require('./webpack.config.base');
 const { merge } = require('webpack-merge');

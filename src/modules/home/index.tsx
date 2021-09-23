@@ -1,3 +1,5 @@
+import pumkin from 'assets/icons/pumkin.svg';
+import { useState } from 'react';
 import {
   decrement,
   increment,
@@ -6,12 +8,10 @@ import {
   incrementIfOdd,
   selectCount,
 } from 'store/counterSlice';
-import styles from './home.module.css';
 import { useAppDispatch, useAppSelector } from 'store/hook';
-import { useState, useEffect } from 'react';
-import pumkin from 'assets/icons/pumkin.svg';
+import styles from './home.module.css';
 
-const Counter = () => {
+const HomePage = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(selectCount);
 
@@ -57,4 +57,4 @@ const Counter = () => {
     </div>
   );
 };
-export default Counter;
+export default HomePage;

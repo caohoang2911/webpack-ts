@@ -1,32 +1,31 @@
 import { lazy } from '@loadable/component';
-import pMinDelay from 'p-min-delay';
-import { Suspense } from 'react';
-const About = lazy(() => pMinDelay(import('modules/about'), 1000));
-const Counter = lazy(() => pMinDelay(import('modules/home'), 1000));
+const HomePage = lazy(() => import('modules/home'));
+const User = lazy(() => import('modules/user/UserPage'));
+const UserDetail = lazy(() => import('modules/user/UserDetailPage'));
 
 export interface RouteApp {
   path: string;
-  exact: boolean;
-  main: () => JSX.Element;
+  exact?: boolean;
+  strict?: boolean;
+  main?: () => JSX.Element;
 }
-
 export const routerApp: Array<RouteApp> = [
   {
     path: '/',
     exact: true,
-    main: () => (
-      <Suspense fallback={<div className="loading">Loading...</div>}>
-        <Counter />
-      </Suspense>
-    ),
+    main: () => <HomePage />,
   },
   {
-    path: '/about',
+    path: '/user',
     exact: true,
-    main: () => (
-      <Suspense fallback={<div className="loading">Loading...</div>}>
-        <About />
-      </Suspense>
-    ),
+    main: () => <User />,
+  },
+  {
+    path: '/user/template',
+    main: () => <User />,
+  },
+  {
+    path: '/user/:id',
+    main: () => <UserDetail />,
   },
 ];

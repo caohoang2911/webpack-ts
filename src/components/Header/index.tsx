@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import './style.scss';
 interface MenuLink {
@@ -5,15 +6,14 @@ interface MenuLink {
   to: string;
   exactActive?: any;
 }
-export const Header = () => {
+const Header = () => {
   const CustomLink = ({ label, to, exactActive }: MenuLink) => {
     return (
       <Route
         path={to}
         exact={exactActive}
-        children={({ match }) => {
-          console.log(match, 'match');
-          const active = match ? 'active' : '';
+        children={({ match }: any) => {
+          const active = match?.isExact ? 'active' : '';
           return (
             <li className={active}>
               <Link to={to}>{label}</Link>
@@ -26,9 +26,11 @@ export const Header = () => {
   return (
     <nav className="top-menu">
       <ul>
-        <CustomLink to="/" exactActive label="Home" />
-        <CustomLink to="/about" label="About" />
+        <CustomLink to="/" exactActive={true} label="Home" />
+        <CustomLink to="/user" label="About" />
+        <CustomLink to="/user/template" label="Detail" />
       </ul>
     </nav>
   );
 };
+export default React.memo(Header);
