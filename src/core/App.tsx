@@ -1,4 +1,3 @@
-import 'core/index.scss';
 import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
 import { Header } from './layout/Header/Header';
 import { RouteApp, routerApp } from './router';

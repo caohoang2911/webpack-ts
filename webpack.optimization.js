@@ -3,9 +3,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCss = require('optimize-css-assets-webpack-plugin');
 const optimization = {
   moduleIds: 'deterministic',
-  runtimeChunk: {
-    name: (entrypoint) => `runtime~${entrypoint.name}`,
-  },
   performance: {
     hints: false,
   },
@@ -40,6 +37,10 @@ const optimization = {
     new OptimizeCss({
       cssProcessorOptions: {
         discardComments: true,
+        map: {
+          inline: false,
+          annotation: true,
+        },
       },
     }),
   ],
@@ -63,5 +64,8 @@ const optimization = {
         reuseExistingChunk: true,
       },
     },
+  },
+  runtimeChunk: {
+    name: (entrypoint) => `runtime-${entrypoint.name}`,
   },
 };

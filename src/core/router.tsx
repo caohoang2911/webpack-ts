@@ -1,5 +1,8 @@
-import About from 'modules/about';
-import Counter from 'modules/home';
+import { lazy } from '@loadable/component';
+import pMinDelay from 'p-min-delay';
+import { Suspense } from 'react';
+const About = lazy(() => pMinDelay(import('modules/about'), 1000));
+const Counter = lazy(() => pMinDelay(import('modules/home'), 1000));
 
 export interface RouteApp {
   path: string;
@@ -11,11 +14,19 @@ export const routerApp: Array<RouteApp> = [
   {
     path: '/',
     exact: true,
-    main: () => <Counter />,
+    main: () => (
+      <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Counter />
+      </Suspense>
+    ),
   },
   {
     path: '/about',
     exact: true,
-    main: () => <About />,
+    main: () => (
+      <Suspense fallback={<div className="loading">Loading...</div>}>
+        <About />
+      </Suspense>
+    ),
   },
 ];

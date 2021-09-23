@@ -8,7 +8,7 @@ import {
 } from 'store/counterSlice';
 import styles from './home.module.css';
 import { useAppDispatch, useAppSelector } from 'store/hook';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import pumkin from 'assets/icons/pumkin.svg';
 
 const Counter = () => {
