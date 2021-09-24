@@ -1,19 +1,41 @@
 var path = require('path');
 const webpack = require('webpack');
 
-var NODE_ENV = process.env.NODE_ENV;
 var isDeveloper = process.env.NODE_ENV == 'development';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
+var babelOptions = {
+  cacheDirectory: true,
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          ie: '11',
+          edge: '15',
+          safari: '10',
+          firefox: '50',
+          chrome: '49',
+        },
+      },
+    ],
+  ],
+};
 const rules = [
   {
     test: /\.ts(x?)$/,
     exclude: /(node_modules|bower_components)/,
     use: [
       {
+        loader: 'babel-loader',
+        options: babelOptions,
+      },
+      {
         loader: 'ts-loader',
+
         options: isDeveloper
           ? {
               getCustomTransformers: () => ({
