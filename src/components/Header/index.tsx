@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo, useEffect } from 'react';
 import { Link, Route } from 'react-router-dom';
 import './style.scss';
 interface MenuLink {
@@ -7,6 +7,10 @@ interface MenuLink {
   exactActive?: any;
 }
 const Header = () => {
+  useEffect(() => {
+    console.log('render Header');
+  }, []);
+
   const CustomLink = ({ label, to, exactActive }: MenuLink) => {
     return (
       <Route
@@ -29,8 +33,10 @@ const Header = () => {
         <CustomLink to="/" exactActive={true} label="Home" />
         <CustomLink to="/user" label="About" />
         <CustomLink to="/user/template" label="Detail" />
+        <CustomLink to="/t/temp" label="Temp" />
+        <CustomLink to="/tele" label="Notfound" />
       </ul>
     </nav>
   );
 };
-export default React.memo(Header);
+export default memo(Header);

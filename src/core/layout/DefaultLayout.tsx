@@ -1,12 +1,11 @@
-import AppConent from 'components/AppContent';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
-const DefaultLayout = () => {
+const DefaultLayout = ({ children }) => {
   return (
     <>
       <Header />
-      <AppConent />
+      {children}
       <Footer />
     </>
   );

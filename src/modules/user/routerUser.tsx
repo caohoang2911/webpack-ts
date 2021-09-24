@@ -2,7 +2,7 @@ import { lazy } from '@loadable/component';
 import { RouteApp } from 'core/router';
 
 const User = lazy(() => import('./UserPage'));
-const UserDetail = lazy(() => import('./UserDetailPage'));
+const UserDetail = lazy(() => import('./UserDetail'));
 const UserTemplate = lazy(() => import('./UserTemplate'));
 
 export const routerUser: Array<RouteApp> = [
@@ -16,7 +16,7 @@ export const routerUser: Array<RouteApp> = [
     main: () => <UserTemplate />,
   },
   {
-    path: '/user/:id',
+    path: '/user/detail',
     main: () => <UserDetail />,
   },
 ];
