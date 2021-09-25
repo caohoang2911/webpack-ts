@@ -1,17 +1,22 @@
 {
-  "root": true,
   "extends": [
+    "prettier",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:react-hooks/recommended"
   ],
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "@typescript-eslint/explicit-module-boundary-types": ["off"],
+
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
     "prettier/prettier": [
-      "warn",
+      "error",
       {
         "arrowParens": "always",
         "bracketSameLine": false,
@@ -29,17 +34,9 @@
         "trailingComma": "es5",
         "useTabs": false,
         "vueIndentScriptAndStyle": false,
-        "printWidth": 80
+        "printWidth": 100,
+        "endOfLine": "auto"
       }
     ]
-  },
-  "overrides": [
-    {
-      // enable the rule specifically for TypeScript files
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": ["error"]
-      }
-    }
-  ]
+  }
 }

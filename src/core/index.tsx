@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from 'store/storeConfig';
-declare var __VERSION__: string;
+declare let __VERSION__: string;
 import App from './App';
 import 'core/index.scss';
 

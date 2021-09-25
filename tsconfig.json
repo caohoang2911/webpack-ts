@@ -1,5 +1,5 @@
 {
   "extends": "./base.json",
-  "include": ["src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "build"]
+  "include": ["src/**/*"], //"tests/**/*"
+  "exclude": ["node_modules", "build", "**/*.spec.ts"]
 }

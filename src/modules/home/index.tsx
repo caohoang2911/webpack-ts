@@ -19,7 +19,7 @@ const HomePage = () => {
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
-    <div className="wrappeddr">
+    <div className="wrapper">
       <img src={pumkin} />
       <div>
         <button

@@ -2,10 +2,15 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const UserDetail = () => {
-  let params = useParams();
+  const params = useParams();
+
   useEffect(() => {
-    console.log(params);
+    function at() {
+      return params;
+    }
+    at();
   }, []);
+
   return <h3>User Detail</h3>;
 };
 

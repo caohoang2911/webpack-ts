@@ -1,8 +1,7 @@
-import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const User = (): JSX.Element => {
-  let history = useHistory();
-  let location = useLocation();
+  const history = useHistory();
 
   return (
     <>
