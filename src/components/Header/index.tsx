@@ -35,6 +35,7 @@ const Header = () => {
         <CustomLink to="/user/template" label="Detail" />
         <CustomLink to="/t/temp" label="Temp" />
         <CustomLink to="/tele" label="Notfound" />
+        <CustomLink to="/detail" label="My detail" />
       </ul>
     </nav>
   );

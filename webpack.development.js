@@ -18,6 +18,7 @@ const devServer = {
 
 module.exports = merge(base, {
   mode: 'development',
+
   optimization: {
     runtimeChunk: 'single',
   },

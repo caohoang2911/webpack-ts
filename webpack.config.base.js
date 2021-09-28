@@ -67,7 +67,6 @@ const rules = [
         loader: 'css-loader',
         options: {
           importLoaders: 1,
-
           sourceMap: isDeveloper ? true : false,
         },
       },
@@ -90,6 +89,7 @@ const rules = [
 ];
 module.exports = {
   target: 'web',
+
   entry: {
     main: './src/core/index.tsx',
     lodash: ['lodash'],
@@ -103,7 +103,6 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     extensions: ['.ts', '.tsx', '.js'],
   },
-
   plugins: [
     new HtmlWebpackPlugin({
       title: isDeveloper ? 'Development' : 'My project',

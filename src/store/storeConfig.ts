@@ -1,14 +1,39 @@
-import { Action, configureStore, EnhancedStore, ThunkAction } from '@reduxjs/toolkit';
+import {
+  Action,
+  combineReducers,
+  configureStore,
+  EnhancedStore,
+  ThunkAction,
+} from '@reduxjs/toolkit';
 import counterReducer from './counterSlice';
 import todosReducer from './todoSlice';
 import productsReducer from './productSlice';
 import logger from 'redux-logger';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+
+const authPersistConfig = {
+  key: 'auth',
+  storage: storage,
+  blacklist: ['counter'],
+};
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['products'],
+};
+
+const rootReducer: any = combineReducers({
+  counter: counterReducer,
+  todos: persistReducer(authPersistConfig, todosReducer),
+  products: productsReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store: EnhancedStore = configureStore({
-  reducer: {
-    counter: counterReducer,
-    todos: todosReducer,
-    products: productsReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 

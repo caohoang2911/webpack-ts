@@ -2,7 +2,7 @@ import axiosClient from './Interceptor';
 
 export const productApi = {
   getProduct: (params) => {
-    return axiosClient.get('/product3s', { params });
+    return axiosClient.get('/products', { params });
   },
   getById: (id) => {
     return axiosClient.get(`/products/${id}`);

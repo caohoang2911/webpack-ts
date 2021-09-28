@@ -1,25 +1,37 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { productApi } from './../api/productApi';
-export const getAsyncProduct: any = createAsyncThunk('counter/getAsyncProduct', async () => {
-  const resonpse: any = await productApi.getProduct({});
-  return resonpse;
-});
+import { RootState } from './storeConfig';
+export const getAsyncProduct: any = createAsyncThunk(
+  'counter/getAsyncProduct',
+  async (param: any, thunkAPI: any) => {
+    const resonpse: any = await productApi.getProduct({ ...param });
+    return resonpse;
+  }
+);
 
 const productSlice = createSlice({
   name: 'products',
-  initialState: [],
+  initialState: {
+    values: [],
+    status: 'idle',
+  },
   reducers: {},
   extraReducers: {
     [getAsyncProduct.pending]: (state, action) => {
-      console.log('pending');
+      state.status = 'idle';
     },
     [getAsyncProduct.rejected]: (state, action) => {
-      console.log('rejected');
+      state.status = 'fulfilled';
     },
     [getAsyncProduct.fulfilled]: (state, action) => {
-      console.log('fulfilled');
+      state.status = 'fulfilled';
+      state.values = action.payload;
     },
   },
 });
+
+export const {} = productSlice.actions;
+
+export const allProduct = (state: RootState) => state.products.values;
 
 export default productSlice.reducer;
