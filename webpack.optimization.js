@@ -3,9 +3,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCss = require('optimize-css-assets-webpack-plugin');
 const optimization = {
   moduleIds: 'deterministic',
-  performance: {
-    hints: false,
-  },
   minimizer: [
     new UglifyJsPlugin({
       cache: true,

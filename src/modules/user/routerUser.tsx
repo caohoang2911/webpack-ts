@@ -1,5 +1,5 @@
 import { lazy } from '@loadable/component';
-import { RouteApp } from 'core/router';
+import { RouteApp } from 'core/router/router';
 
 const User = lazy(() => import('./UserPage'));
 const UserDetail = lazy(() => import('./UserDetail'));

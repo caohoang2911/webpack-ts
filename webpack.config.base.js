@@ -92,6 +92,7 @@ module.exports = {
   target: 'web',
   entry: {
     main: './src/core/index.tsx',
+    lodash: ['lodash'],
     vendor: ['react', 'react-dom', 'react-redux'], //first load before cache in browser ==> more than loader
   },
   module: {
@@ -122,9 +123,9 @@ module.exports = {
       filename: isDeveloper ? '[name].css' : 'static/css/[name].[contenthash:8].css',
       chunkFilename: isDeveloper ? '[id].css' : 'static/css/[name].[contenthash:8].chunk.css',
     }),
-    new webpack.DefinePlugin({
-      __VERSION__: isDeveloper ? JSON.stringify('dev_5fa3b9') : JSON.stringify('pro_5fa3b9'),
-    }),
+    //  new webpack.DefinePlugin({
+    //    __VERSION__: isDeveloper ? JSON.stringify('dev_5fa3b9') : JSON.stringify('pro_5fa3b9'),
+    //  }),
     //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 };

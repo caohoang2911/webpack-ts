@@ -1,15 +1,44 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  AnyAction,
+  createAsyncThunk,
+  unwrapResult,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { AppDispatch, AppThunk, RootState } from './storeConfig';
 
 // Define a type for the slice state
 interface CounterState {
   value: number;
+  state: string;
 }
 
 // Define the initial state using that type
 const initialState: CounterState = {
   value: 0,
+  state: 'idle',
 };
+
+export const fetchCount = (amount: number) => {
+  return new Promise((resolve, reject) => {
+    reject(new Error('404 error'));
+    return;
+    setTimeout(() => {
+      resolve({ data: amount });
+    }, 2000);
+  });
+};
+export const incrementAsync: any = createAsyncThunk(
+  'counter/fetchCount',
+  async (amount: number) => {
+    const resonpse: any = await fetchCount(amount);
+    incrementByAmount(resonpse.data);
+    return resonpse.data;
+  }
+);
+function isActionWithNumberPayload(action: AnyAction): action is PayloadAction<number> {
+  return typeof action.payload === 'number';
+}
 
 export const counterSlice = createSlice({
   name: 'counter',
@@ -26,17 +55,21 @@ export const counterSlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
-    extraReducers: (builder: any) => {
-      alert(3);
-      builder
-        .addCase(incrementAsync.pending, (state) => {
-          state.status = 'loading';
-        })
-        .addCase(incrementAsync.fulfilled, (state, action) => {
-          state.status = 'idle';
-          state.value += action.payload;
-        });
-    },
+  },
+  extraReducers: (builder: any) => {
+    builder
+      .addCase(incrementAsync.pending, (state) => {
+        console.log(1);
+        state.status = 'loading';
+      })
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        console.log(2);
+        state.value += action.payload;
+      })
+      .addMatcher(isActionWithNumberPayload, (state, action) => {
+        console.log(action, 'action');
+      });
   },
 });
 
@@ -53,16 +86,5 @@ export const incrementIfOdd: any =
       dispatch(incrementByAmount(amount));
     }
   };
-export const fecthCount = (amount: number) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(amount);
-    }, 2000);
-  });
-};
-export const incrementAsync: any = createAsyncThunk('counter/fetch', async (amount: number) => {
-  console.log(fecthCount(amount));
-  return fecthCount(amount);
-});
 
 export default counterSlice.reducer;

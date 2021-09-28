@@ -1,8 +1,15 @@
 import { Action, configureStore, EnhancedStore, ThunkAction } from '@reduxjs/toolkit';
 import counterReducer from './counterSlice';
-
+import todosReducer from './todoSlice';
+import productsReducer from './productSlice';
+import logger from 'redux-logger';
 export const store: EnhancedStore = configureStore({
-  reducer: { counter: counterReducer },
+  reducer: {
+    counter: counterReducer,
+    todos: todosReducer,
+    products: productsReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

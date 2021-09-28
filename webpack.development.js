@@ -25,6 +25,7 @@ module.exports = merge(base, {
     filename: '[name].js',
     path: path.resolve(__dirname, ''),
   },
+  devtool: 'inline-source-map',
   devServer,
   plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean),
 });

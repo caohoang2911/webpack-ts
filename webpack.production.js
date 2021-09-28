@@ -16,6 +16,11 @@ module.exports = merge(base, {
     clean: true,
   },
   devtool: 'source-map', // create .js.map
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
   optimization: { ...optimization },
   plugins: [new BundleAnalyzerPlugin()],
 });

@@ -5,7 +5,6 @@ import { store } from 'store/storeConfig';
 declare let __VERSION__: string;
 import App from './App';
 import 'core/index.scss';
-
 if (process.env.NODE_ENV !== 'production') {
   console.log('Looks like we are in development mode verion ' + __VERSION__);
 }
