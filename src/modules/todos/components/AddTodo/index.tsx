@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodos } from 'store/todoSlice';
+import { addTodos } from 'store/reducers/todoSlice';
 
 export default function AddTodo() {
   const [text, setTodo] = useState('');

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { productApi } from './../api/productApi';
-import { RootState } from './storeConfig';
+import { productApi } from '../../api/productApi';
+import { RootState } from '../storeConfig';
 export const getAsyncProduct: any = createAsyncThunk(
   'counter/getAsyncProduct',
   async (param: any, thunkAPI: any) => {

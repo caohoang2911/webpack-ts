@@ -3,8 +3,6 @@ const base = require('./webpack.config.base');
 const { merge } = require('webpack-merge');
 const path = require('path');
 
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
 const devServer = {
   open: true,
   hot: true,
@@ -19,14 +17,11 @@ const devServer = {
 module.exports = merge(base, {
   mode: 'development',
 
-  optimization: {
-    runtimeChunk: 'single',
-  },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, ''),
   },
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
   devServer,
-  plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean),
+  plugins: [].filter(Boolean),
 });

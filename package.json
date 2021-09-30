@@ -1,28 +1,26 @@
 {
   "name": "react-project",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "React with typescript",
+  "main": "src/core/index.tsx",
   "scripts": {
-    "dev": "webpack serve  --node-env development ",
+    "dev": "webpack serve --node-env development",
     "build": "webpack --node-env production ",
-    "lint": "eslint . --ext .ts,tsx",
-    "lint:fix": "eslint . --ext .ts,tsx --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint . --ext .ts,tsx src/",
+    "lint:fix": "eslint --fix --ext .ts,tsx  src/",
+    "test": "jest",
+    "prettier": "prettier --check \"src/**/(*.tsx|*.ts|*.jsx|*.js|*.scss|*.css)\"",
+    "prettier:fix": "prettier --write \"src/**/(*.tsx|*.ts|*.jsx|*.js|*.scss|*.css)\""
   },
-  "author": "",
+  "author": "Cao Hoang - MOMO",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.5",
-    "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
     "@babel/preset-env": "^7.15.6",
-    "@babel/preset-react": "^7.14.5",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
     "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "babel-loader": "^8.2.2",
-    "babel-polyfill": "^6.26.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
@@ -36,8 +34,6 @@
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "prettier": "^2.4.1",
     "react-loadable": "^5.5.0",
-    "react-refresh": "^0.10.0",
-    "react-refresh-typescript": "^2.0.2",
     "redux-logger": "^3.0.6",
     "sass": "^1.41.0",
     "sass-loader": "^12.1.0",
@@ -69,8 +65,7 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "redux": "^4.1.1",
-    "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-persist": "^6.0.0"
   },
-  "types": "./src/index.d.ts"
+  "types": "./src/types/index.d.ts"
 }

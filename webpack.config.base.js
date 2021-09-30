@@ -35,15 +35,6 @@ const rules = [
       },
       {
         loader: 'ts-loader',
-
-        options: isDeveloper
-          ? {
-              getCustomTransformers: () => ({
-                before: [require('react-refresh-typescript')()],
-              }),
-              reportFiles: ['src/**/*.{ts,tsx}', '!src/skip.ts'],
-            }
-          : undefined,
       },
     ],
   },
@@ -92,8 +83,8 @@ module.exports = {
 
   entry: {
     main: './src/core/index.tsx',
-    lodash: ['lodash'],
-    vendor: ['react', 'react-dom', 'react-redux'], //first load before cache in browser ==> more than loader
+    //  lodash: ['lodash'],
+    //  vendor: ['react', 'react-dom', 'react-redux'], //first load before cache in browser ==> more than loader
   },
   module: {
     rules,

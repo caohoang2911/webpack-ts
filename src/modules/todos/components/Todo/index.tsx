@@ -1,11 +1,10 @@
-import React from 'react';
-import { useTodo } from '../hook';
+import { useTodo } from 'modules/todos/hooks/todoHook';
 
-export default function Todo({ name, complete, id }) {
+export default function Todo({ name, complete, id }: any) {
   const [onDelete, toggleTodo] = useTodo(id, complete);
   return (
     <div style={{ display: 'flex' }}>
-      <input type="checkbox" onChange={toggleTodo} />
+      <input checked={complete} type="checkbox" onChange={toggleTodo} />
       <span style={{ textDecoration: complete && 'line-through' }}>{name}</span>
       <button onClick={onDelete}>X</button>
     </div>

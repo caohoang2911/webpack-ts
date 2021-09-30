@@ -1,9 +1,9 @@
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { allProduct, getAsyncProduct } from 'store/productSlice';
+import { allProduct, getAsyncProduct } from 'store/reducers/productSlice';
 import { RootState } from 'store/storeConfig';
-import { useAppDispatch, useAppSelector } from './../../../store/hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
 const UserDetail = () => {
   const loading = useAppSelector((state: RootState) => state.products.status);
   const products = useSelector(allProduct);
