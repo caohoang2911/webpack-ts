@@ -14,14 +14,13 @@ const todoInits = [
 
 export const useTodoList = () => {
   const dispatch = useAppDispatch();
-  const [state, setstate] = useState<Array<any> | undefined>(undefined);
 
   let lstTodo: any = useAppSelector(todoSelector.selectAll, shallowEqual);
 
   const [todos, setTodos] = useState<any>([]);
   const totalTodo: number = useAppSelector(todoSelector.selectTotal);
   const lstDeleted: Array<any> = useAppSelector(deletedTodo);
-  console.info('d');
+
   useEffect(() => {
     dispatch(todoReceived(todoInits));
   }, []);

@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store } from 'store/storeConfig';
 import App from './App';
 declare var module;
+declare var process;
 
 if (process.env.NODE_ENV !== 'production') {
   if (module.hot) {

@@ -1,9 +1,13 @@
-import { useTodoList } from 'modules/todos/hooks/listTodoHook';
 import Todo from '../Todo';
-import { useEffect } from 'react';
-
+import { useTodoList } from 'modules/todos/hooks/listTodoHook';
+export function filterByTerm(inputArr: any, searchTerm: string) {
+  return inputArr.filter(function (arrayElement: any) {
+    return arrayElement.url.match(searchTerm);
+  });
+}
 export default function TodoList() {
   const [todos, totalTodo, widgetDeleted, removeAllTodo, sortByName, isSort] = useTodoList();
+
   return (
     <div>
       <button

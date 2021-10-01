@@ -19,7 +19,7 @@ function sortTodobyName(a, b) {
   return Number(a.complete) - Number(b.complete);
 }
 
-export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>({
+export const todoAdapter = createEntityAdapter<Todo>({
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 });
 
@@ -29,7 +29,7 @@ const todoSlice = createSlice({
   name: 'todos',
   initialState: todoAdapter.getInitialState({
     todoDeleted: [],
-    sortBy: '',
+    sortBy: 'complete',
   }),
   reducers: {
     sortTodo: (state: RootState, action: PayloadAction<any>) => {
