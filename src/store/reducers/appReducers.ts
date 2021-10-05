@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { RootState } from 'store/storeConfig';
 import counterReducer from './counterSlice';
 import productsReducer from './productSlice';
+import { counterTodoSlice, selectedTodoSlice, todosSlice } from './tesSlice';
 import todosReducer from './todoSlice';
 
 const persistConfig = {
@@ -15,6 +16,9 @@ const persistConfig = {
 const rootReducer: RootState = combineReducers({
   counter: counterReducer,
   todos: todosReducer,
+  todosT: todosSlice.reducer,
+  selectedTodo: selectedTodoSlice.reducer,
+  counterT: counterTodoSlice.reducer,
   products: productsReducer,
 });
 

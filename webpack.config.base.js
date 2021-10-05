@@ -53,12 +53,21 @@ const rules = [
   {
     test: /\.(css|sass|scss)$/,
     use: [
-      MiniCssExtractPlugin.loader,
+      isDeveloper ? 'style-loader' : MiniCssExtractPlugin.loader,
       {
         loader: 'css-loader',
         options: {
           importLoaders: 1,
           sourceMap: isDeveloper ? true : false,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true,
+          postcssOptions: {
+            path: 'postcss.config.js',
+          },
         },
       },
       {
@@ -80,11 +89,10 @@ const rules = [
 ];
 module.exports = {
   target: 'web',
-
   entry: {
     main: './src/core/index.tsx',
-    //  lodash: ['lodash'],
-    //  vendor: ['react', 'react-dom', 'react-redux'], //first load before cache in browser ==> more than loader
+    lodash: ['lodash'],
+    vendor: ['react', 'react-dom', 'react-redux'], //first load before cache in browser ==> more than loader
   },
   module: {
     rules,

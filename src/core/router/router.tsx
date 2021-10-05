@@ -7,6 +7,7 @@ import UserDetail from './../../modules/user/UserDetail/index';
 const HomePage = lazy(() => import('modules/home'));
 import { ApiProvider } from '@reduxjs/toolkit/query/react';
 import productService from './../../services/productService';
+import Fade from 'components/Fade';
 
 export interface RouteApp {
   path: string;
@@ -19,18 +20,28 @@ export const routerApp: Array<RouteApp> = [
     path: '/',
     exact: true,
     main: () => (
-      <ApiProvider api={productService}>
-        <Query />
-      </ApiProvider>
+      // <ApiProvider api={productService}>
+      <Fade>
+        <UserDetail />
+      </Fade>
+      // </ApiProvider>
     ),
   },
   {
     path: '/couter',
-    main: () => <HomePage />,
+    main: () => (
+      <Fade>
+        <HomePage />
+      </Fade>
+    ),
   },
   {
     path: '/detail',
-    main: () => <UserDetail />,
+    main: () => (
+      <Fade>
+        <UserDetail />
+      </Fade>
+    ),
   },
   ...routerUser,
   {

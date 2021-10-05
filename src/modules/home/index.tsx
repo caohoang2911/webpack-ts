@@ -11,6 +11,7 @@ import {
 } from '@reducers/counterSlice';
 import { useAppDispatch, useAppSelector } from 'modules/hook';
 import styles from './home.module.css';
+
 const HomePage = () => {
   const dispatch = useAppDispatch();
   let toto;

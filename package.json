@@ -23,6 +23,7 @@
     "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
+    "autoprefixer": "^10.3.7",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
@@ -35,6 +36,7 @@
     "mini-css-extract-plugin": "^2.3.0",
     "node-sass": "^6.0.1",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "postcss-loader": "^6.1.1",
     "prettier": "^2.4.1",
     "react-loadable": "^5.5.0",
     "redux-logger": "^3.0.6",
@@ -63,6 +65,7 @@
     "@types/react-redux": "^7.1.18",
     "@types/react-router-dom": "^5.3.0",
     "axios": "^0.21.4",
+    "framer-motion": "^4.1.17",
     "jest": "^27.2.4",
     "lodash": "^4.17.21",
     "query-string": "^7.0.1",
@@ -74,5 +77,18 @@
     "redux-persist": "^6.0.0",
     "ts-jest": "^27.0.5"
   },
-  "types": "./src/types/index.d.ts"
+  "types": "./src/types/index.d.ts",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "last 1 ie version"
+    ]
+  }
 }

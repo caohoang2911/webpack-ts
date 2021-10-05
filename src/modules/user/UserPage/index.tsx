@@ -1,49 +1,136 @@
-import { useReducer, useEffect } from 'react';
-import _ from 'lodash';
-function init(initialCount) {
-  return { count: initialCount };
-}
+import { create, select, toggle } from '@reducers/tesSlice';
+import { useAppSelector } from 'modules/hook';
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { RootState } from 'store/storeConfig';
+import { useAppDispatch } from './../../hook';
+import './style.scss';
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'increment':
-      return { count: state.count + 1 };
-    case 'decrement':
-      return { count: state.count - 1 };
-    case 'reset':
-      return init(action.payload);
-    default:
-      throw new Error();
-  }
-}
-const booksArray = [
-  { title: 'First', pages: 400 },
-  { title: 'Second', pages: 100 },
-  { title: 'Third', pages: 300 },
-];
+const User = function () {
+  const [newTodoInput, setNewTodoInput] = useState<string>('');
+  const [editTodoInput, setEditTodoInput] = useState<string>('');
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const editInput = useRef<HTMLInputElement>(null);
 
-const User = (): JSX.Element => {
-  const initialCount = 3;
+  const dispath = useAppDispatch();
+
+  const todos = useAppSelector((state: RootState) => state.todosT);
+  const selectedTodoId = useAppSelector((state: RootState) => state.selectedTodo);
+  const editedCount = useAppSelector((state: RootState) => state.counterT);
+
+  const selectedTodo = (selectedTodoId && todos.find((todo) => todo.id === selectedTodoId)) || null;
+
+  const handleNewInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setNewTodoInput(e.target.value);
+  };
+
+  const handleEditInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setEditTodoInput(e.target.value);
+  };
+
+  const handleCreateNewTodo = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    dispath(create({ desc: newTodoInput }));
+  };
+
+  const handleSelectTodo = (todoId: string) => (): void => {
+    dispath(select({ id: todoId }));
+  };
+
+  const handleEdit = (): void => {
+    if (!selectedTodo) return;
+
+    setEditTodoInput(selectedTodo.desc);
+    setIsEditMode(true);
+  };
 
   useEffect(() => {
-    const temp = _.find(booksArray, function (book) {
-      return book.pages > 150;
-    });
-    console.log(temp, 'temp');
-  }, []);
-  const [state, dispatch] = useReducer(reducer, initialCount, init);
+    if (isEditMode) {
+      editInput?.current?.focus();
+    }
+  }, [isEditMode]);
+
+  const handleUpdate = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+  };
+
+  const handleCancelUpdate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    e.preventDefault();
+    setIsEditMode(false);
+    setEditTodoInput('');
+  };
+
+  const handleToggle = (): void => {
+    if (!selectedTodoId || !selectedTodo) return;
+    dispath(toggle({ id: selectedTodoId }));
+  };
+
+  const handleDelete = (): void => {
+    if (!selectedTodoId) return;
+  };
+
   return (
-    <>
-      {console.log('render')}
-      <input defaultValue="1000" />
-      Count: {state.count}
-      <button onClick={() => dispatch({ type: 'reset', payload: initialCount })}>Reset</button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
-      {booksArray.map((book) => (
-        <h3>{book.title}</h3>
-      ))}
-    </>
+    <div className="App">
+      <div className="App__counter">Todos Updated Count: {editedCount | 0}</div>
+      <div className="App__header">
+        <h1>Todo: Redux vs RTK Edition</h1>
+        <form onSubmit={handleCreateNewTodo}>
+          <label htmlFor="new-todo">Add new:</label>
+          <input onChange={handleNewInputChange} id="new-todo" value={newTodoInput} />
+          <button type="submit">Create</button>
+        </form>
+      </div>
+      <div className="App__body">
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <li className="item"></li>
+        <ul className="App__list">
+          <h2>My Todos:</h2>
+          {todos.map((todo, i) => (
+            <li
+              className={`${todo.isComplete ? 'done' : ''} ${
+                todo.id === selectedTodoId ? 'active' : ''
+              }`}
+              key={todo.id}
+              onClick={handleSelectTodo(todo.id)}
+            >
+              <span className="list-number">{i + 1})</span> {todo.desc}
+            </li>
+          ))}
+        </ul>
+        <div className="App_todo-info">
+          <h2>Selected Todo:</h2>
+          {selectedTodo === null ? (
+            <span className="empty-state">No Todo Selected</span>
+          ) : !isEditMode ? (
+            <>
+              <span className={`todo-desc ${selectedTodo?.isComplete ? 'done' : ''}`}>
+                {selectedTodo.desc}
+              </span>
+              <div className="todo-actions">
+                <button onClick={handleEdit}>Edit</button>
+                <button onClick={handleToggle}>Toggle</button>
+                <button onClick={handleDelete}>Delete</button>
+              </div>
+            </>
+          ) : (
+            <form onSubmit={handleUpdate}>
+              <label htmlFor="edit-todo">Edit:</label>
+              <input ref={editInput} onChange={handleEditInputChange} value={editTodoInput} />
+              <button type="submit">Update</button>
+              <button onClick={handleCancelUpdate}>Cancel</button>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
+
 export default User;
