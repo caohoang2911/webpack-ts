@@ -66,7 +66,8 @@ const rules = [
         options: {
           sourceMap: true,
           postcssOptions: {
-            path: 'postcss.config.js',
+            // path: 'postcss.config.js',
+            plugins: [require('autoprefixer')],
           },
         },
       },
