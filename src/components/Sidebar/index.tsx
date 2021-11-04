@@ -1,26 +1,28 @@
 import './style.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import logo from 'assets/icons/logo.svg';
 const Sidebar = () => {
+   const [open, setOpen] = useState(true)
    const refSidebar: any = useRef();
    useEffect(() => {
 
    }, [])
    const toggleSidebar = () => {
-      // console.log(, 'refSidebar')
-      refSidebar.current.classList.toggle('open')
+      setOpen(!open)
    }
    return (
-      <div className="sidebar curved open" ref={refSidebar}>
+      // toggle curved
+      <div className={`sidebar curved  ${open && 'open'}`} ref={refSidebar}>
          <div className="logo-details">
-            <img className="icon" src={logo} style={{ margin: '0 auto' }} width="40" height="40" />
-            <i onClick={toggleSidebar} className='bx bx-menu' id="btn" ></i>
+            <img className="icon logo" src={logo} width="40" height="40" />
+            <i onClick={toggleSidebar} className={`bx bx-menu ${open ? 'bx-menu-alt-right' : 'bx-menu'}`} id="btn" ></i>
+
          </div>
          <ul className="nav-list">
             <li className="active">
                <a href="#">
                   <i className='bx bx-grid-alt'></i>
-                  <span className="links_name">Dashboardddd</span>
+                  <span className="links_name">Dashboard</span>
                </a>
                <span className="tooltip">Dashboard</span>
             </li>
