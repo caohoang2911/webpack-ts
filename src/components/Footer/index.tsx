@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './style.scss';
-const Footer = () => {
+interface Iprops {}
+const Footer = (props: Iprops): JSX.Element => {
   useEffect(() => {
     console.log('render Footer');
   }, []);

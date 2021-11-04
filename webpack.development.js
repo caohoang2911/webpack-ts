@@ -1,4 +1,3 @@
-console.log('Usage webpack.development.js');
 const base = require('./webpack.config.base');
 const { merge } = require('webpack-merge');
 const path = require('path');
@@ -16,7 +15,9 @@ const devServer = {
 
 module.exports = merge(base, {
   mode: 'development',
-
+  optimization: {
+    runtimeChunk: 'single',
+  },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, ''),

@@ -1,5 +1,4 @@
-var path = require('path');
-const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 var isDeveloper = process.env.NODE_ENV == 'development';
 
@@ -9,20 +8,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 var babelOptions = {
   cacheDirectory: true,
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        targets: {
-          ie: '11',
-          edge: '15',
-          safari: '10',
-          firefox: '50',
-          chrome: '49',
-        },
-      },
-    ],
-  ],
+  presets: [['@babel/preset-env']],
 };
 const rules = [
   {
@@ -42,7 +28,7 @@ const rules = [
     loader: 'file-loader',
     test: /\.gz$|\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2|\.eot$|.ttf$|\.wav$|\.mp3$|\.icon$|\?[a-z0-9]+?$/,
     options: {
-      name(resourcePath, resourceQuery) {
+      name() {
         if (isDeveloper) {
           return '[path][name].[ext]';
         }
@@ -82,7 +68,7 @@ const rules = [
         loader: 'sass-resources-loader', // package: sass-resources-loader
         options: {
           // Provide path to the file with resources
-          resources: ['./src/core/styles/_variable.scss'],
+          resources: ['./src/core/scss/_variable.scss'],
         },
       },
     ],
@@ -122,9 +108,13 @@ module.exports = {
       filename: isDeveloper ? '[name].css' : 'static/css/[name].[contenthash:8].css',
       chunkFilename: isDeveloper ? '[id].css' : 'static/css/[name].[contenthash:8].chunk.css',
     }),
-    //  new webpack.DefinePlugin({
-    //    __VERSION__: isDeveloper ? JSON.stringify('dev_5fa3b9') : JSON.stringify('pro_5fa3b9'),
-    //  }),
-    //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new Dotenv({
+      path: isDeveloper
+        ? './.env.development'
+        : process.env.NODE_ENV
+        ? './.env.production'
+        : './.env.staging',
+      ignoreStub: true,
+    }),
   ],
 };

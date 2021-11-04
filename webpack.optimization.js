@@ -63,6 +63,7 @@ const optimization = {
     },
   },
   runtimeChunk: {
-    name: (entrypoint) => `runtime-${entrypoint.name}`,
+    name: (entrypoint) => `runtimechunk~${entrypoint.name}`,
   },
 };
+// export default optimization

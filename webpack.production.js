@@ -1,6 +1,5 @@
-console.log('Usage webpack.production.js');
 var path = require('path');
-
+const webpack = require('webpack');
 const base = require('./webpack.config.base');
 const { merge } = require('webpack-merge');
 
@@ -22,5 +21,11 @@ module.exports = merge(base, {
     maxAssetSize: 512000,
   },
   optimization: { ...optimization },
-  plugins: [new BundleAnalyzerPlugin()],
+  plugins: [
+    new BundleAnalyzerPlugin(),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }), // ignore file don't used
+  ],
 });

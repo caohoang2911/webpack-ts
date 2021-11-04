@@ -10,20 +10,20 @@ declare var module;
 declare var process;
 
 if (process.env.NODE_ENV !== 'production') {
-  if (module.hot) {
-    module.hot.accept();
-  }
-  console.log('Looks like we are in development mode verion ');
+   if (module.hot) {
+      module.hot.accept();
+   }
+   console.log('Looks like we are in development mode verion ');
 }
 
 const persistor = persistStore(store);
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </PersistGate>
-  </Provider>,
-  document.getElementById('root')
+   <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+         <React.StrictMode>
+            <App />
+         </React.StrictMode>
+      </PersistGate>
+   </Provider>,
+   document.getElementById('root')
 );
