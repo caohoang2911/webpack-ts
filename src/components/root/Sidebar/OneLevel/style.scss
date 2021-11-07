@@ -1,20 +1,24 @@
 /* Google Font Link */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-$bg: #fff;
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+html {
+  overflow: hidden;
 }
+$bg: #fff;
+
 .sidebar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
-  width: 78px;
-  background: url(https://static.mservice.io/jk/momo2020/img/momo/bg-taiapp-big-op.jpg) center fixed;
+  width: var(--sidebar-width);
+  background: var(--image-bg-sidebar) center fixed;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -27,14 +31,14 @@ $bg: #fff;
       &.active {
         &::after {
           content: '';
-          width: 40px;
-          height: 40px;
+          width: 30px;
+          height: 30px;
           background: transparent;
           position: absolute;
           right: 0;
-          top: -40px;
+          top: -30px;
           border-radius: 50%;
-          box-shadow: 20px 20px $bg;
+          box-shadow: 15px 15px $bg;
         }
         &::before {
           content: '';
@@ -95,7 +99,7 @@ $bg: #fff;
   }
   .nav-list {
     margin-top: 20px;
-    height: 100%;
+    //  height: 100%;
   }
   li {
     position: relative;
@@ -155,7 +159,7 @@ $bg: #fff;
       display: flex;
       height: 100%;
       width: 100%;
-      border-radius: 24px;
+      border-radius: 15px;
       align-items: center;
       text-decoration: none;
       transition: all 0.4s ease;
@@ -209,13 +213,13 @@ $bg: #fff;
       align-items: center;
       flex-wrap: nowrap;
     }
-    img {
-      height: 45px;
-      width: 45px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-right: 10px;
-    }
+    // img {
+    //   height: 45px;
+    //   width: 45px;
+    //   object-fit: cover;
+    //   border-radius: 6px;
+    //   margin-right: 10px;
+    // }
   }
   .logo-details {
     height: 60px;
@@ -249,23 +253,4 @@ $bg: #fff;
       transition: all 0.5s ease;
     }
   }
-}
-
-.wrapper {
-  position: relative;
-  background: $bg;
-  min-height: 100vh;
-  top: 0;
-  left: 78px;
-  width: calc(100% - 78px);
-  transition: all 0.5s ease;
-  z-index: 2;
-}
-
-.wrapper .text {
-  display: inline-block;
-  color: #11101d;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px;
 }

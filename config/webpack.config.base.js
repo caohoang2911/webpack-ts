@@ -1,5 +1,5 @@
 const Dotenv = require('dotenv-webpack');
-
+const path = require('path');
 var isDeveloper = process.env.NODE_ENV == 'development';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,8 +9,43 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 var babelOptions = {
   cacheDirectory: true,
   presets: [['@babel/preset-env']],
+  plugins: [
+    [
+      // babel-plugin-import for antd components
+      // This plugin modifies the imports done in this way
+      // import { Select } from 'antd'
+      // To only import the relevant component and styles, not the whole library
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
+  ],
 };
+console.log(path.resolve(__dirname, '../', 'theme.less'));
 const rules = [
+  {
+    test: /\.less$/,
+    use: [
+      {
+        loader: 'style-loader',
+      },
+      {
+        loader: 'css-loader', // translates CSS into CommonJS
+      },
+      {
+        loader: 'less-loader', // compiles Less to CSS
+        options: {
+          lessOptions: {
+            modifyVars: require('../theme.ts'),
+            javascriptEnabled: true,
+          },
+        },
+      },
+    ],
+  },
   {
     test: /\.ts(x?)$/,
     exclude: /(node_modules|bower_components)/,
@@ -36,6 +71,7 @@ const rules = [
       },
     },
   },
+
   {
     test: /\.(css|sass|scss)$/,
     use: [
@@ -44,13 +80,13 @@ const rules = [
         loader: 'css-loader',
         options: {
           importLoaders: 1,
-          sourceMap: isDeveloper ? true : false,
+          sourceMap: isDeveloper,
         },
       },
       {
         loader: 'postcss-loader',
         options: {
-          sourceMap: true,
+          sourceMap: isDeveloper,
           postcssOptions: {
             // path: 'postcss.config.js',
             plugins: [require('autoprefixer')],
@@ -61,14 +97,14 @@ const rules = [
         loader: 'sass-loader',
         options: {
           implementation: require('sass'),
-          sourceMap: isDeveloper ? true : false,
+          sourceMap: isDeveloper,
         },
       },
       {
         loader: 'sass-resources-loader', // package: sass-resources-loader
         options: {
           // Provide path to the file with resources
-          resources: ['./src/core/scss/_variable.scss'],
+          resources: ['./src/core/scss/variable.module.scss'],
         },
       },
     ],
@@ -91,8 +127,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: isDeveloper ? 'Development' : 'My project',
+      title: isDeveloper ? 'Development' : 'Momo project',
       template: './src/core/index.html',
+      favicon: './src/assets/momo.ico',
       minify: isDeveloper
         ? undefined
         : {
@@ -110,10 +147,10 @@ module.exports = {
     }),
     new Dotenv({
       path: isDeveloper
-        ? './.env.development'
+        ? './env/.env.development'
         : process.env.NODE_ENV
-        ? './.env.production'
-        : './.env.staging',
+        ? './env/.env.production'
+        : './env/.env.staging',
       ignoreStub: true,
     }),
   ],

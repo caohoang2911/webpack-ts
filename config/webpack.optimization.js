@@ -22,8 +22,6 @@ const optimization = {
         },
       },
     }),
-  ],
-  minimizer: [
     new TerserPlugin({
       parallel: true,
       terserOptions: {
@@ -41,6 +39,7 @@ const optimization = {
       },
     }),
   ],
+
   splitChunks: {
     chunks: 'async',
     minSize: 20000,

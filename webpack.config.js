@@ -1,5 +1,5 @@
-console.log(console.log('Environment ' + process.env.NODE_ENV));
+console.log('Environment ' + process.env.NODE_ENV);
 module.exports =
   process.env.NODE_ENV === 'production'
-    ? require('./webpack.production.js')
-    : require('./webpack.development.js');
+    ? require('./config/webpack.production.js')
+    : require('./config/webpack.development.js');

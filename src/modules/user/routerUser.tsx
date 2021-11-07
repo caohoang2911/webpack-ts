@@ -4,31 +4,24 @@ import { RouteApp } from 'core/router/router';
 const User = lazy(() => import('./UserPage'));
 const UserDetail = lazy(() => import('./UserDetail'));
 const UserTemplate = lazy(() => import('./UserTemplate'));
-import Fade from './../../components/Fade/index';
 export const routerUser: Array<RouteApp> = [
-  {
-    path: '/user',
-    exact: true,
-    main: () => (
-      <Fade>
-        <User />
-      </Fade>
-    ),
-  },
-  {
-    path: '/user/template',
-    main: () => (
-      <Fade>
-        <UserTemplate />
-      </Fade>
-    ),
-  },
-  {
-    path: '/user/detail',
-    main: () => (
-      <Fade>
-        <UserDetail />
-      </Fade>
-    ),
-  },
+    {
+        path: '/user',
+        exact: true,
+        main: () => (
+            <User />
+        ),
+    },
+    {
+        path: '/user/template',
+        main: () => (
+            <UserTemplate />
+        ),
+    },
+    {
+        path: '/user/detail',
+        main: () => (
+            <UserDetail />
+        ),
+    },
 ];

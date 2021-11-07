@@ -4,60 +4,56 @@ import { routerUser } from 'modules/user/routerUser';
 import { Redirect } from 'react-router-dom';
 import UserDetail from './../../modules/user/UserDetail/index';
 import Login from 'modules/login';
-const HomePage = lazy(() => import('modules/home'));
-import Fade from 'components/Fade';
+// const HomePage = lazy(() => import('modules/home'));
+
+import HomePage from 'modules/home';
+import Example from 'modules/Example';
+
+
 
 export interface RouteApp {
-   path: string;
-   exact?: boolean;
-   strict?: boolean;
-   main?: () => JSX.Element;
+    path: string;
+    exact?: boolean;
+    strict?: boolean;
+    main?: () => JSX.Element;
 }
 export const routerApp: Array<RouteApp> = [
-   {
-      path: '/',
-      exact: true,
-      main: () => (
-         <Fade>
+    {
+        path: '/',
+        exact: true,
+        main: () => (
+            <Example />
+        ),
+    },
+    {
+        path: '/product',
+        main: () => (
             <UserDetail />
-         </Fade>
-      ),
-   },
-   {
-      path: '/couter',
-      main: () => (
-         <Fade>
-            <HomePage />
-         </Fade>
-      ),
-   },
-   {
-      path: '/detail',
-      main: () => (
-         <Fade>
+        ),
+    },
+    {
+        path: '/product/detail',
+        main: () => (
             <UserDetail />
-         </Fade>
-      ),
-   },
-   {
-      path: '/login',
-      exact: true,
-      main: () => (
-         <Fade>
+        ),
+    },
+    {
+        path: '/login',
+        exact: true,
+        main: () => (
             <Login />
-         </Fade>
-      ),
-   },
-   ...routerUser,
-   {
-      path: '*',
-      main: () => <Redirect to="/notfound" />,
-   },
+        ),
+    },
+    ...routerUser,
+    {
+        path: '*',
+        main: () => <Redirect to="/notfound" />,
+    },
 ];
 
 export const emptyRouter: Array<RouteApp> = [
-   {
-      path: '/notfound',
-      main: () => <NotFound />,
-   },
+    {
+        path: '/notfound',
+        main: () => <NotFound />,
+    },
 ];
