@@ -1,22 +1,10 @@
-import {
-  createDraftSafeSelector,
-  createEntityAdapter,
-  createSelector,
-  createSlice,
-  current,
-  EntityAdapter,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/storeConfig';
 
 export interface Todo {
   id: string;
   name: string;
   complete: boolean;
-}
-
-function sortTodobyName(a, b) {
-  return Number(a.complete) - Number(b.complete);
 }
 
 export const todoAdapter = createEntityAdapter<Todo>({
@@ -33,7 +21,7 @@ const todoSlice = createSlice({
   }),
   reducers: {
     sortTodo: (state: RootState, action: PayloadAction<any>) => {
-      const { sortBy, todoSort } = action.payload;
+      const { todoSort } = action.payload;
       state = todoSort;
     },
     addTodo(state: RootState, action) {
@@ -49,7 +37,7 @@ const todoSlice = createSlice({
     updateTodo(state: RootState, action) {
       todoAdapter.updateOne(state, action);
     },
-    removeTodo(state: RootState, action) {
+    removeTodo(state: RootState) {
       todoAdapter.removeAll(state);
     },
     restore(state, action) {
@@ -62,7 +50,6 @@ const todoSlice = createSlice({
       todoAdapter.setAll(state, action.payload);
     },
   },
-  extraReducers: (builder) => {},
 });
 export const {
   addTodo,
@@ -76,11 +63,5 @@ export const {
 } = todoSlice.actions;
 
 export const deletedTodo = (state: RootState) => state.todos.todoDeleted;
-
-const todoEntities = (state: RootState) => state;
-
-const allTodoSelector = createDraftSafeSelector(todoEntities, (items) => {
-  return Object.values(items);
-});
 
 export default todoSlice.reducer;

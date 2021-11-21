@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v1 as uuid } from 'uuid';
 export interface Todo {
   id: string;

@@ -1,20 +1,22 @@
+:root {
+  --color-primary: #{$color-primary};
+  --color-black: #{$color-black};
 
-:root{
-    --color-primary: #{$color-primary};
-    --color-black: #{$color-black};
+  --color-error: #{$color-error};
+  --color-warning: #{$color-warning};
+  --color-success: #{$color-success};
 
-    --color-error:#{$color-error};
-    --color-warning:#{$color-warning};
-    --color-success: #{$color-success};
+  --color-white: #{$color-white};
 
+  // bg white
+  --bg-white: #{$bg-white};
 
+  --image-bg-sidebar: #{$image-bg-sidebar};
 
-    --image-bg-sidebar: #{$image-bg-sidebar};
+  --sidebar-width: #{$sidebar-width};
+  --header-height: #{$header-height};
+  // font and typegrap
 
-    --sidebar-width: #{$sidebar-width};
-    --header-height: #{$header-height};
-    // font and typegrap
-
-    --body-font: #{$body-font};
-    --normal-font-size: #{$normal-font-size};
+  --body-font: #{$body-font};
+  --normal-font-size: #{$normal-font-size};
 }

@@ -13,12 +13,12 @@ export const _nav_single = [
   {
     name: 'Message',
     icon: 'bx bx-chat',
-    path: '/message',
+    path: '/product/3',
   },
   {
     name: 'Analytics',
     icon: 'bx bx-pie-chart-alt-2',
-    path: '/analytics',
+    path: '/product/3/3',
   },
   {
     name: 'File Manager',

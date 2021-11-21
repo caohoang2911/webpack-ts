@@ -8,7 +8,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 var babelOptions = {
   cacheDirectory: true,
-  presets: [['@babel/preset-env']],
+  presets: ['@babel/preset-env'],
   plugins: [
     [
       // babel-plugin-import for antd components
@@ -22,9 +22,10 @@ var babelOptions = {
         style: true,
       },
     ],
+    'babel-plugin-react-scoped-css',
   ],
 };
-console.log(path.resolve(__dirname, '../', 'theme.less'));
+
 const rules = [
   {
     test: /\.less$/,
@@ -35,6 +36,7 @@ const rules = [
       {
         loader: 'css-loader', // translates CSS into CommonJS
       },
+      { loader: 'scoped-css-loader' },
       {
         loader: 'less-loader', // compiles Less to CSS
         options: {
@@ -83,16 +85,18 @@ const rules = [
           sourceMap: isDeveloper,
         },
       },
+
       {
         loader: 'postcss-loader',
         options: {
           sourceMap: isDeveloper,
           postcssOptions: {
             // path: 'postcss.config.js',
-            plugins: [require('autoprefixer')],
+            plugins: [require('autoprefixer'), require('tailwindcss')],
           },
         },
       },
+      { loader: 'scoped-css-loader' },
       {
         loader: 'sass-loader',
         options: {
@@ -104,7 +108,11 @@ const rules = [
         loader: 'sass-resources-loader', // package: sass-resources-loader
         options: {
           // Provide path to the file with resources
-          resources: ['./src/core/scss/variable.module.scss'],
+          resources: [
+            './src/core/scss/variable.scss',
+            './src/core/scss/_func.scss',
+            './src/core/scss/_mixin.scss',
+          ],
         },
       },
     ],

@@ -1,16 +1,86 @@
 /* Google Font Link */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-html {
-  overflow: hidden;
+@mixin layoutMobile {
+  @include maxWidth(768px) {
+    left: 0;
+    width: 100%;
+  }
 }
-$bg: #fff;
-
+@mixin notOpen {
+  @include maxWidth(768px) {
+    left: -100%;
+  }
+  .profile-details {
+    display: none;
+    @include maxWidth(768px) {
+      ~ i {
+        display: none;
+      }
+    }
+  }
+  ~ .wrapper {
+    .header {
+      width: calc(100% - 80px);
+      left: 80px;
+      @include maxWidth(768px) {
+        width: 100%;
+        left: 0px;
+      }
+    }
+  }
+}
+@mixin isOpen {
+  width: 250px;
+  background-position: auto;
+  ~ .wrapper {
+    left: 250px;
+    width: calc(100% - 250px);
+    @include layoutMobile;
+    .header {
+      left: 250px;
+      width: calc(100% - 250px);
+      @include layoutMobile;
+    }
+  }
+  @include maxWidth(768px) {
+    ~ .wrapper {
+      width: 100%;
+    }
+  }
+  .logo-details {
+    .icon,
+    .logo_name {
+      opacity: 1;
+    }
+    #btn {
+      text-align: right;
+    }
+  }
+  li {
+    .tooltip {
+      display: none;
+    }
+    a {
+      .links_name {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+    &.profile {
+      width: 250px;
+      #log_out {
+        width: 50px;
+        background: none;
+      }
+    }
+  }
+}
 .sidebar {
+  z-index:3;
   &::-webkit-scrollbar {
     display: none;
   }
-
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   position: fixed;
@@ -18,10 +88,15 @@ $bg: #fff;
   top: 0;
   height: 100%;
   width: var(--sidebar-width);
-  background: var(--image-bg-sidebar) center fixed;
+  background: var(--bg-white);
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
+  box-shadow: 1px 1px 1px #dfdfdf;
+  @include maxWidth(768px) {
+    position: fixed;
+    left: 0%;
+  }
   &.curved {
     padding: 6px 0px 6px 14px;
     .logo-details #btn {
@@ -38,7 +113,7 @@ $bg: #fff;
           right: 0;
           top: -30px;
           border-radius: 50%;
-          box-shadow: 15px 15px $bg;
+          box-shadow: 15px 15px var(--color-white);
         }
         &::before {
           content: '';
@@ -49,48 +124,22 @@ $bg: #fff;
           right: 0;
           bottom: -40px;
           border-radius: 50%;
-          box-shadow: 20px -20px $bg;
+          box-shadow: 20px -20px var(--color-white);
         }
       }
     }
+  }
+  &:not(.open) {
+    @include notOpen;
   }
   &.open {
-    width: 250px;
-    background-position: auto;
-    ~ .wrapper {
-      left: 250px;
-      width: calc(100% - 250px);
-    }
-    .logo-details {
-      .icon,
-      .logo_name {
-        opacity: 1;
-      }
-      #btn {
-        text-align: right;
-      }
-    }
-    li {
-      .tooltip {
-        display: none;
-      }
-      a {
-        .links_name {
-          opacity: 1;
-          pointer-events: auto;
-        }
-      }
-      &.profile {
-        width: 250px;
-        #log_out {
-          width: 50px;
-          background: none;
-        }
-      }
-    }
+    @include isOpen;
+  }
+  @include maxWidth(768px) {
+    @include isOpen;
   }
   i {
-    color: #fff;
+    color: var(--color-black);
     height: 60px;
     min-width: 50px;
     font-size: 28px;
@@ -107,10 +156,10 @@ $bg: #fff;
     list-style: none;
     &.active {
       a {
-        background: #fff;
+        background: var(--bg-white);
         .links_name,
         i {
-          color: #11101d;
+          color: var(--color-primary);
         }
       }
     }
@@ -132,11 +181,13 @@ $bg: #fff;
       padding: 10px 14px;
       transition: all 0.5s ease;
       overflow: hidden;
+
       .name,
       .job {
         font-size: 15px;
+        margin-left: 10px;
         font-weight: 400;
-        color: #fff;
+        color: var(--bg-black);
         white-space: nowrap;
       }
       .job {
@@ -147,7 +198,7 @@ $bg: #fff;
         top: 50%;
         right: 0;
         transform: translateY(-50%);
-        background: #1d1b31;
+        background: var(--bg-white);
         width: 100%;
         height: 60px;
         line-height: 60px;
@@ -164,15 +215,15 @@ $bg: #fff;
       text-decoration: none;
       transition: all 0.4s ease;
       &:hover {
-        color: #212121;
+        color: var(--color-primary);
         .links_name,
         i {
           transition: all 0.5s ease;
-          color: #11101d;
+          color: var(--color-primary);
         }
       }
       .links_name {
-        color: #fff;
+        color: #111111;
         font-size: 15px;
         font-weight: 400;
         white-space: nowrap;
@@ -186,7 +237,7 @@ $bg: #fff;
       top: -20px;
       left: calc(100% + 15px);
       z-index: 3;
-      background: #fff;
+      background: var(--bg-white);
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
       padding: 6px 12px;
       border-radius: 4px;
@@ -213,13 +264,6 @@ $bg: #fff;
       align-items: center;
       flex-wrap: nowrap;
     }
-    // img {
-    //   height: 45px;
-    //   width: 45px;
-    //   object-fit: cover;
-    //   border-radius: 6px;
-    //   margin-right: 10px;
-    // }
   }
   .logo-details {
     height: 60px;
@@ -232,7 +276,7 @@ $bg: #fff;
       margin-left: 15px;
     }
     .logo_name {
-      color: $bg;
+      color: var(--color-white);
       font-size: 20px;
       font-weight: 600;
       opacity: 0;

@@ -11,7 +11,7 @@ module.exports = merge(base, {
   output: {
     filename: 'static/js/[name].[chunkhash].js',
     publicPath: './',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, '../build'),
     clean: true,
   },
   devtool: 'source-map', // create .js.map
