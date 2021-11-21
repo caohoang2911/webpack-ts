@@ -9,11 +9,6 @@
 /tmp
 /out-tsc
 
-# env
-
-.env.development
-.env.staging
-.env.production
 
 # testing
 /coverage
