@@ -1,6 +1,4 @@
-import React from 'react';
-import productService from './../../services/productService';
-
+import productService from '../../api/productService';
 export default function Query() {
   const { data, refetch, isFetching } = productService.useGetProductQuery(null);
 

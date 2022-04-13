@@ -3,12 +3,12 @@
   display: inline-block;
   color: #11101d;
   position: fixed;
-  left: 80px;
+  left: 0;
   top: 0;
   font-size: 25px;
   font-weight: 500;
   height: var(--header-height);
-  width: calc(100% - 80px);
+  width: 100%;
   border-bottom: 1px solid #dfdfdf;
   ~ .main {
     padding-top: calc(var(--header-height) + 5px) !important;

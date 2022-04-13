@@ -24,7 +24,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <>
       <SharedNavBarProvider initialState={true}>
-        <Sidebar single />
+        <Sidebar  />
         <section className="wrapper">
           <Header />
           <main className="main p-3">

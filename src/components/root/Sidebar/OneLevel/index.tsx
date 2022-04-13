@@ -1,14 +1,13 @@
-import './style.scss';
-import { useEffect } from 'react';
 import logo from 'assets/icons/logo.png';
-import NavHead from './components/NavHead';
-import NavList from './components/NavList';
-import { _nav_single } from '../_nav';
-import NavItem from './components/NavItem';
-import NavUser from './components/NavUser';
 import BaseMask from 'components/commons/BaseMask';
-import { useWindowSize } from 'react-use';
 import { useSidebar } from 'core/layout/DefaultLayout';
+import { useWindowSize } from 'react-use';
+import { _nav_single } from '../_nav';
+import NavHead from './components/NavHead';
+import NavItem from './components/NavItem';
+import NavList from './components/NavList';
+import NavUser from './components/NavUser';
+import './style.scss';
 interface Iprops {
   curved?: boolean;
 }

@@ -1,4 +1,4 @@
-import axiosClient from './Interceptor';
+import axiosClient from '../helpers/Interceptor';
 
 export const productApi = {
   getProduct: (params) => {

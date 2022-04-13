@@ -135,7 +135,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: isDeveloper ? 'Development' : 'Momo project',
+      title: isDeveloper ? 'Development' : 'Momo project | production',
       template: './src/core/index.html',
       favicon: './src/assets/momo.ico',
       minify: isDeveloper

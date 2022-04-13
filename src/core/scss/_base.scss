@@ -16,12 +16,12 @@ body {
 }
 
 .wrapper {
-  z-index:1;
+  z-index: 1;
   position: relative;
   background: #ffffff;
   min-height: 100vh;
-  left: 78px;
-  width: calc(100% - 78px);
+  left: 80px;
+  width: calc(100% - 80px);
   transition: all 0.5s ease;
   @include maxWidth(768px) {
     width: 100%;

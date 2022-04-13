@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 
 const Login = () => {
   return <div>This Login</div>;

@@ -1,12 +1,9 @@
-import { lazy } from '@loadable/component';
-import { NotFound } from 'modules/notfound';
-import { Redirect } from 'react-router-dom';
-import UserDetail from './../../modules/user/UserDetail/index';
-import Login from 'modules/login';
-// const HomePage = lazy(() => import('modules/home'));
 
-import HomePage from 'modules/home';
-import Example from 'modules/Example';
+import { NotFound } from 'modules/notfound';
+import UserDetail from './../../modules/user/UserDetail/index';
+
+
+
 
 export interface RouteApp {
     path: string;
@@ -20,7 +17,7 @@ export const routerApp: Array<RouteApp> = [
         path: '/',
         exact: true,
         name: 'Home',
-        Component: Example,
+        Component: UserDetail,
     },
     {
         path: '/product',
@@ -32,12 +29,12 @@ export const routerApp: Array<RouteApp> = [
         path: '/product/:id',
         exact: true,
         name: 'Product Detail',
-        Component: Example,
+        Component: UserDetail,
     },
     {
         path: '/product/:id/:salary',
         name: 'Product Salary',
-        Component: Example,
+        Component: UserDetail,
     },
 
     // {
